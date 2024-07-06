@@ -20,7 +20,7 @@
 \setmainfont{Times New Roman} % Если возникают проблемы при компиляции с данной строкой, необходимо на компьютер установить  Times New Roman
 \RequirePackage{newtxmath} % Поменять гарнитуру в фомулах на Times New Roman
 
-\RequirePackage[left=30mm, right=15mm, top=20mm, bottom=20mm]{geometry}
+\RequirePackage[left=30mm, right=10mm, top=20mm, bottom=20mm]{geometry}
 
 \RequirePackage{indentfirst} % Красная строка у первого абзаца раздела
 
@@ -47,23 +47,27 @@
 \renewcommand\cfttoctitlefont{\hfill\fontsize{16pt}{16pt}\selectfont\bfseries\MakeUppercase}
 \renewcommand\cftaftertoctitle{\hfill\hfill}
 
+\let \savenumberline \numberline
+\def \numberline#1{\savenumberline{#1.}}
+
 \setlength{\cftbeforesecskip}{0pt} % Addtional space between sections in toc
 
-%\setlength{\cftsecindent}{0pt} % Remove indent in toc for \section
-%\setlength{\cftsubsecindent}{0pt} % Remove indent in toc for \subsection
-%\setlength{\cftsubsubsecindent}{0pt} % Remove indent in toc for \subsubsection
+\setlength{\cftsecindent}{0pt} % Remove indent in toc for \section
+\setlength{\cftsubsecindent}{0pt} % Remove indent in toc for \subsection
+\setlength{\cftsubsubsecindent}{0pt} % Remove indent in toc for \subsubsection
 
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % Добавить точки у разделов в содержании
 
 \RequirePackage{placeins} % Команда \FloatBarrier для размещения плавающего окружения в пределах раздела, подраздела, пункта
 
+
 % Настройка раздела, подраздела, подподраздела
 \RequirePackage{titlesec}
-\titleformat{\section}{\FloatBarrier\parskip=6pt\filcenter\fontsize{16pt}{16pt}\selectfont\bfseries\uppercase}{\thesection}{.5em}{}
-\titleformat{\subsection}{\FloatBarrier\filcenter\bfseries}{\thesubsection}{.5em}{}
-\titleformat{\subsubsection}{\FloatBarrier\filcenter\bfseries}{\thesubsubsection}{.5em}{}
-%\titlespacing*{\subsection}{0pt}{*2}{0pt} % Remove indent for \subsection 
-%\titlespacing*{\subsubsection}{0pt}{*2}{0pt} % Remove indent for \subsubsection 
+\titleformat{\section}{\FloatBarrier\parskip=6pt\filcenter\fontsize{16pt}{16pt}\selectfont\bfseries\uppercase}{\thesection.}{.5em}{}
+\titleformat{\subsection}{\FloatBarrier\filcenter\bfseries}{\thesubsection.}{.5em}{}
+\titleformat{\subsubsection}{\FloatBarrier\itshape}{\thesubsubsection.}{.5em}{}
+\titlespacing*{\subsection}{0pt}{*2}{0pt} % Remove indent for \subsection 
+\titlespacing*{\subsubsection}{0pt}{*2}{0pt} % Remove indent for \subsubsection 
 
 
 \AddToHook{cmd/section/before}{\clearpage} % Начинать раздел с новой страницы
@@ -86,7 +90,7 @@
 
 % Форматирование списков
 \RequirePackage{enumitem}
-\setlist{itemsep=0pt, parsep=0pt, topsep=0mm, } % Возможна опция wide
+\setlist{itemsep=0pt, parsep=0pt, topsep=0mm} % Возможна опция wide
 \makeatletter
 \AddEnumerateCounter*{\asbuk}{\c@asbuk}
 \makeatother
